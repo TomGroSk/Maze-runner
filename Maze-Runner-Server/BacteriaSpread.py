@@ -12,7 +12,7 @@ class BacteriaSpread:
         nextLayer = []
 
         while True:
-            start = Position(randint(0, maze.width), randint(0, maze.height))
+            start = Position(randint(0, maze.width-1), randint(0, maze.height-1))
             if not maze.getByPosition(start).locked:
                 break
 
@@ -33,7 +33,3 @@ class BacteriaSpread:
             nextLayer = []
 
         return maze
-
-
-maze = BacteriaSpread().generate(99, 49)
-arr = Converter().toBoolArray(maze)

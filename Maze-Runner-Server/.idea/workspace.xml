@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2196582d-4123-40fd-ae2f-914d286de9e1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BacteriaSpread.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Cell.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Converter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Maze.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BacteriaSpread.py" beforeDir="false" afterPath="$PROJECT_DIR$/BacteriaSpread.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,6 +127,8 @@
       <updated>1587411870844</updated>
       <workItem from="1587411889407" duration="10000" />
       <workItem from="1587411997273" duration="13475000" />
+      <workItem from="1587427242949" duration="300000" />
+      <workItem from="1587455796745" duration="2386000" />
     </task>
     <servers />
   </component>
@@ -142,38 +140,38 @@
       <screen x="0" y="0" width="1360" height="728" />
     </state>
     <state x="410" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1360.728@0.0.1360.728" timestamp="1587425589012" />
-    <state width="1317" height="470" key="GridCell.Tab.0.bottom" timestamp="1587427096149">
+    <state width="1317" height="454" key="GridCell.Tab.0.bottom" timestamp="1587459704846">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="470" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1587427096149" />
-    <state width="1317" height="470" key="GridCell.Tab.0.center" timestamp="1587427096149">
+    <state width="1317" height="454" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1587459704846" />
+    <state width="1317" height="454" key="GridCell.Tab.0.center" timestamp="1587459704846">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="470" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1587427096149" />
-    <state width="1317" height="470" key="GridCell.Tab.0.left" timestamp="1587427096149">
+    <state width="1317" height="454" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1587459704846" />
+    <state width="1317" height="454" key="GridCell.Tab.0.left" timestamp="1587459704846">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="470" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1587427096149" />
-    <state width="1317" height="470" key="GridCell.Tab.0.right" timestamp="1587427096149">
+    <state width="1317" height="454" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1587459704846" />
+    <state width="1317" height="454" key="GridCell.Tab.0.right" timestamp="1587459704846">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="470" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1587427096149" />
-    <state width="1317" height="470" key="GridCell.Tab.1.bottom" timestamp="1587427096149">
+    <state width="1317" height="454" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1587459704846" />
+    <state width="1317" height="219" key="GridCell.Tab.1.bottom" timestamp="1587457479518">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="470" key="GridCell.Tab.1.bottom/0.0.1360.728@0.0.1360.728" timestamp="1587427096149" />
-    <state width="1317" height="470" key="GridCell.Tab.1.center" timestamp="1587427096149">
+    <state width="1317" height="219" key="GridCell.Tab.1.bottom/0.0.1360.728@0.0.1360.728" timestamp="1587457479518" />
+    <state width="1317" height="219" key="GridCell.Tab.1.center" timestamp="1587457479518">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="470" key="GridCell.Tab.1.center/0.0.1360.728@0.0.1360.728" timestamp="1587427096149" />
-    <state width="1317" height="470" key="GridCell.Tab.1.left" timestamp="1587427096149">
+    <state width="1317" height="219" key="GridCell.Tab.1.center/0.0.1360.728@0.0.1360.728" timestamp="1587457479518" />
+    <state width="1317" height="219" key="GridCell.Tab.1.left" timestamp="1587457479518">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="470" key="GridCell.Tab.1.left/0.0.1360.728@0.0.1360.728" timestamp="1587427096149" />
-    <state width="1317" height="470" key="GridCell.Tab.1.right" timestamp="1587427096149">
+    <state width="1317" height="219" key="GridCell.Tab.1.left/0.0.1360.728@0.0.1360.728" timestamp="1587457479518" />
+    <state width="1317" height="219" key="GridCell.Tab.1.right" timestamp="1587457479518">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="470" key="GridCell.Tab.1.right/0.0.1360.728@0.0.1360.728" timestamp="1587427096149" />
+    <state width="1317" height="219" key="GridCell.Tab.1.right/0.0.1360.728@0.0.1360.728" timestamp="1587457479518" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -189,6 +187,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Maze_Runner_Server$Cell.coverage" NAME="Cell Coverage Results" MODIFIED="1587415335838" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Maze_Runner_Server$Converter.coverage" NAME="Converter Coverage Results" MODIFIED="1587425084608" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Maze_Runner_Server$BacteriaSpread.coverage" NAME="BacteriaSpread Coverage Results" MODIFIED="1587427091380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Maze_Runner_Server$BacteriaSpread.coverage" NAME="BacteriaSpread Coverage Results" MODIFIED="1587459633861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
