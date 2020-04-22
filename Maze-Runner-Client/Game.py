@@ -14,10 +14,12 @@ class Game:
     lastPlayerMove = '.'
     playerSpeed = 10
     sizeOfWall = 128
+    framerate = 120
 
     def __init__(self):
         pygame.init()
         pygame.key.set_repeat(20)
+        self.clock = pygame.time.Clock()
 
         self.screen = pygame.display.set_mode(self.windowSize)
 
@@ -60,6 +62,8 @@ class Game:
         self.handleCollision()
 
         # send data to server
+
+        self.clock.tick(self.framerate)
 
         self.draw()
 
