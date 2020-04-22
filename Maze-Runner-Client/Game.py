@@ -6,11 +6,14 @@ from Player import Player
 from Wall import Wall
 from Road import Road
 
+
 class Game:
 
     windowSize = width, height = 800, 600
     cameraX, cameraY = -400, -300
     lastPlayerMove = '.'
+    playerSpeed = 10
+    sizeOfWall = 128
 
     def __init__(self):
         pygame.init()
@@ -45,8 +48,8 @@ class Game:
                 if cell:
                     self.walls.append(Wall(y, x))
                 self.roads.append(Road(y, x))
-                y += 128
-            x += 128
+                y += self.sizeOfWall
+            x += self.sizeOfWall
             y = 0
 
     def executeGameLogic(self):
@@ -67,37 +70,37 @@ class Game:
             if event.type == pygame.KEYDOWN:
                 if event.key == K_w:
                     self.lastPlayerMove = 'w'
-                    self.mainPlayer.move(0, -10)
-                    self.cameraY -= 10
+                    self.mainPlayer.move(0, -self.playerSpeed)
+                    self.cameraY -= self.playerSpeed
                 if event.key == K_s:
                     self.lastPlayerMove = 's'
-                    self.mainPlayer.move(0, 10)
-                    self.cameraY += 10
+                    self.mainPlayer.move(0, self.playerSpeed)
+                    self.cameraY += self.playerSpeed
                 if event.key == K_a:
                     self.lastPlayerMove = 'a'
-                    self.mainPlayer.move(-10, 0)
-                    self.cameraX -= 10
+                    self.mainPlayer.move(-self.playerSpeed, 0)
+                    self.cameraX -= self.playerSpeed
                 if event.key == K_d:
                     self.lastPlayerMove = 'd'
-                    self.mainPlayer.move(10, 0)
-                    self.cameraX += 10
+                    self.mainPlayer.move(self.playerSpeed, 0)
+                    self.cameraX += self.playerSpeed
 
     def handleCollision(self):
 
         for wall in self.walls:
             if wall.collidedWith(self.mainPlayer.rect):
                 if self.lastPlayerMove == 'w':
-                    self.mainPlayer.move(0, 10)
-                    self.cameraY += 10
+                    self.mainPlayer.move(0, self.playerSpeed)
+                    self.cameraY += self.playerSpeed
                 elif self.lastPlayerMove == 's':
-                    self.mainPlayer.move(0, -10)
-                    self.cameraY -= 10
+                    self.mainPlayer.move(0, -self.playerSpeed)
+                    self.cameraY -= self.playerSpeed
                 elif self.lastPlayerMove == 'a':
-                    self.mainPlayer.move(10, 0)
-                    self.cameraX += 10
+                    self.mainPlayer.move(self.playerSpeed, 0)
+                    self.cameraX += self.playerSpeed
                 elif self.lastPlayerMove == 'd':
-                    self.mainPlayer.move(-10, 0)
-                    self.cameraX -= 10
+                    self.mainPlayer.move(-self.playerSpeed, 0)
+                    self.cameraX -= self.playerSpeed
 
 
     def draw(self):
