@@ -10,3 +10,6 @@ class Wall:
         self.rect.x = x
         self.rect.y = y
 
+    def collidedWith(self, rect):
+        return self.rect.colliderect(rect)
+

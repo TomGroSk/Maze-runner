@@ -16,3 +16,7 @@ class Player:
     def setPosition(self, x, y):
         self.rect.x = x
         self.rect.y = y
+
+    def move(self, x, y):
+        self.rect.x += x
+        self.rect.y += y

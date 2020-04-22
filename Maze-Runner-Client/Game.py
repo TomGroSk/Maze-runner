@@ -10,6 +10,7 @@ class Game:
 
     windowSize = width, height = 800, 600
     cameraX, cameraY = -400, -300
+    lastPlayerMove = '.'
 
     def __init__(self):
         pygame.init()
@@ -53,7 +54,7 @@ class Game:
 
         self.handleKeyboard()
 
-        # collisions
+        self.handleCollision()
 
         # send data to server
 
@@ -65,17 +66,39 @@ class Game:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == K_w:
-                    self.mainPlayer.rect.y -= 10
+                    self.lastPlayerMove = 'w'
+                    self.mainPlayer.move(0, -10)
                     self.cameraY -= 10
                 if event.key == K_s:
-                    self.mainPlayer.rect.y += 10
+                    self.lastPlayerMove = 's'
+                    self.mainPlayer.move(0, 10)
                     self.cameraY += 10
                 if event.key == K_a:
-                    self.mainPlayer.rect.x -= 10
+                    self.lastPlayerMove = 'a'
+                    self.mainPlayer.move(-10, 0)
                     self.cameraX -= 10
                 if event.key == K_d:
-                    self.mainPlayer.rect.x += 10
+                    self.lastPlayerMove = 'd'
+                    self.mainPlayer.move(10, 0)
                     self.cameraX += 10
+
+    def handleCollision(self):
+
+        for wall in self.walls:
+            if wall.collidedWith(self.mainPlayer.rect):
+                if self.lastPlayerMove == 'w':
+                    self.mainPlayer.move(0, 10)
+                    self.cameraY += 10
+                elif self.lastPlayerMove == 's':
+                    self.mainPlayer.move(0, -10)
+                    self.cameraY -= 10
+                elif self.lastPlayerMove == 'a':
+                    self.mainPlayer.move(10, 0)
+                    self.cameraX += 10
+                elif self.lastPlayerMove == 'd':
+                    self.mainPlayer.move(-10, 0)
+                    self.cameraX -= 10
+
 
     def draw(self):
         self.screen.fill((0, 0, 0))  # clean screen
