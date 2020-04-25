@@ -6,9 +6,11 @@ from Player import Player
 from Wall import Wall
 from Road import Road
 
+sys.path.insert(0, '../Maze-Runner-Server')
+from BacteriaSpread import BacteriaSpread
+
 
 class Game:
-
     windowSize = width, height = 800, 600
     cameraX, cameraY = -400, -300
     lastPlayerMove = '.'
@@ -35,21 +37,24 @@ class Game:
 
     def loadInitDataFromServer(self):  # test
         # load init data from server
-            # player id
-            # other player data
-            # map
-        mazeArray = [[False, False, False, False], [True, False, True, False], [False, True, True, False], [True, True, False, True]]
+        # player id
+        # other player data
+        # map
+
+        mazeArray = BacteriaSpread.generateBooleanMaze(100, 100)
         self.prepareMap(mazeArray)
 
         self.mainPlayer = Player(1, 0, 0)
 
     def prepareMap(self, mazeArray):
         x, y = 0, 0
+        spriteWall = pygame.image.load("img/wall.png")
+        spriteRoad = pygame.image.load("img/ground.png")
         for row in mazeArray:
             for cell in row:
                 if cell:
-                    self.walls.append(Wall(y, x))
-                self.roads.append(Road(y, x))
+                    self.walls.append(Wall(y, x, spriteWall))
+                self.roads.append(Road(y, x, spriteRoad))
                 y += self.sizeOfWall
             x += self.sizeOfWall
             y = 0
@@ -105,7 +110,6 @@ class Game:
                 elif self.lastPlayerMove == 'd':
                     self.mainPlayer.move(-self.playerSpeed, 0)
                     self.cameraX -= self.playerSpeed
-
 
     def draw(self):
         self.screen.fill((0, 0, 0))  # clean screen

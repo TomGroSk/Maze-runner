@@ -6,7 +6,7 @@ class Converter:
 
     @staticmethod
     def toBoolArray(maze: Maze):
-        booleanArray = [[False for x in range(maze.height * 2)] for y in range(maze.width * 2)]
+        booleanArray = [[True for x in range(maze.height * 2)] for y in range(maze.width * 2)]
 
         for i in range(0, maze.width * 2, 2):
             for j in range(0, maze.height * 2, 2):
@@ -15,22 +15,19 @@ class Converter:
 
                 if maze.getByPosition(Position(i // 2, j // 2)).bottom and maze.getByPosition(
                         Position(i // 2, j // 2)).right:
-                    booleanArray[i][j] = True
-                    booleanArray[i + 1][j] = True
-                    booleanArray[i][j + 1] = True
+                    booleanArray[i][j] = False
+                    booleanArray[i + 1][j] = False
+                    booleanArray[i][j + 1] = False
 
                 elif maze.getByPosition(Position(i // 2, j // 2)).bottom:
-                    booleanArray[i][j] = True
-                    booleanArray[i][j + 1] = True
+                    booleanArray[i][j] = False
+                    booleanArray[i][j + 1] = False
 
                 elif maze.getByPosition(Position(i // 2, j // 2)).right:
-                    booleanArray[i][j] = True
-                    booleanArray[i + 1][j] = True
-
-                elif maze.getByPosition(Position(i // 2, j // 2)).locked:
-                    continue
+                    booleanArray[i][j] = False
+                    booleanArray[i + 1][j] = False
                 else:
-                    booleanArray[i][j] = True
+                    booleanArray[i][j] = False
 
         return booleanArray
 

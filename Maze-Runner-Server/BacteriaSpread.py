@@ -1,4 +1,5 @@
 from Cell import Position
+from Converter import Converter
 from Maze import Maze
 from random import randint
 from random import shuffle
@@ -11,10 +12,7 @@ class BacteriaSpread:
         currentLayer = []
         nextLayer = []
 
-        while True:
-            start = Position(randint(0, mazeLayout.width - 1), randint(0, mazeLayout.height - 1))
-            if not mazeLayout.getByPosition(start).locked:
-                break
+        start = Position(randint(0, mazeLayout.width - 1), randint(0, mazeLayout.height - 1))
 
         mazeLayout.getByPosition(start).visited = True
         currentLayer.append(start)
@@ -33,3 +31,12 @@ class BacteriaSpread:
             nextLayer = []
 
         return mazeLayout
+
+    @staticmethod
+    def generateBooleanMaze(x, y):
+        test = BacteriaSpread.generate(x, y)
+        maze = Converter.toBoolArray(test)
+        return maze
+
+
+# BacteriaSpread.generateBooleanMaze(10, 10)
