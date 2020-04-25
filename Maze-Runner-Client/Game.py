@@ -23,7 +23,8 @@ class Game:
         pygame.key.set_repeat(20)
         self.clock = pygame.time.Clock()
 
-        self.screen = pygame.display.set_mode(self.windowSize)
+        self.screen = pygame.display.set_mode(self.windowSize, DOUBLEBUF)
+        self.screen.set_alpha(None)
 
         self.players = []
         self.walls = []
@@ -41,7 +42,7 @@ class Game:
         # other player data
         # map
 
-        mazeArray = BacteriaSpread.generateBooleanMaze(100, 100)
+        mazeArray = BacteriaSpread.generateBooleanMaze(25, 25)
         self.prepareMap(mazeArray)
 
         self.mainPlayer = Player(1, 0, 0)
