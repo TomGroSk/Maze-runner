@@ -6,10 +6,10 @@ class Converter:
 
     @staticmethod
     def toBoolArray(maze: Maze):
-        booleanArray = [[True for x in range(maze.height * 2)] for y in range(maze.width * 2)]
+        booleanArray = [[True for x in range(maze.height * 2+1)] for y in range(maze.width * 2+1)]
 
-        for i in range(0, maze.width * 2, 2):
-            for j in range(0, maze.height * 2, 2):
+        for i in range(1, maze.width * 2, 2):
+            for j in range(1, maze.height * 2, 2):
                 if not maze.getByPosition(Position(i // 2, j // 2)).visited:
                     continue
 

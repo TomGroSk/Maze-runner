@@ -12,18 +12,19 @@ from BacteriaSpread import BacteriaSpread
 
 class Game:
     windowSize = width, height = 800, 600
-    cameraX, cameraY = -400, -300
+    cameraX, cameraY = -240, -140
     lastPlayerMove = '.'
     playerSpeed = 10
     sizeOfWall = 128
-    framerate = 120
+    framerate = 60
 
     def __init__(self):
+        self.mainPlayer = Player(1, 160, 160)
         pygame.init()
         pygame.key.set_repeat(20)
         self.clock = pygame.time.Clock()
 
-        self.screen = pygame.display.set_mode(self.windowSize)
+        self.screen = pygame.display.set_mode(self.windowSize, DOUBLEBUF)
 
         self.players = []
         self.walls = []
@@ -41,10 +42,8 @@ class Game:
         # other player data
         # map
 
-        mazeArray = BacteriaSpread.generateBooleanMaze(100, 100)
+        mazeArray = BacteriaSpread.generateBooleanMaze(25, 25)
         self.prepareMap(mazeArray)
-
-        self.mainPlayer = Player(1, 0, 0)
 
     def prepareMap(self, mazeArray):
         x, y = 0, 0
