@@ -25,6 +25,7 @@ class Game:
         self.clock = pygame.time.Clock()
 
         self.screen = pygame.display.set_mode(self.windowSize, DOUBLEBUF)
+        self.screen.set_alpha(None)
 
         self.players = []
         self.walls = []
