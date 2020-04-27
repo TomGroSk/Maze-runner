@@ -34,9 +34,28 @@ class BacteriaSpread:
 
     @staticmethod
     def generateBooleanMaze(x, y):
-        test = BacteriaSpread.generate(x, y)
-        maze = Converter.toBoolArray(test)
-        return maze
+        rawMaze = BacteriaSpread.generate(x, y)
+        return Converter.toBoolArray(rawMaze)
+
+    @staticmethod
+    def generateEndPoint(mazeLayout, areaPercent):
+        percentage = areaPercent / 100
+        x, y = len(mazeLayout[0])-1, len(mazeLayout)-1         # size of maze - 1; upper range
+        x_buffer = x - int(x * percentage)-1                   # % area where should not be end game point; lower range
+        y_buffer = y - int(y * percentage)-1
+
+        end_x = randint(x_buffer, x)
+        end_y = randint(y_buffer, y)
+
+        while mazeLayout[end_x][end_y]:
+            end_x = randint(x_buffer, x)
+            end_y = randint(y_buffer, y)
+
+        return Position(end_x, end_y)
+
+
+
+
 
 
 # BacteriaSpread.generateBooleanMaze(10, 10)
