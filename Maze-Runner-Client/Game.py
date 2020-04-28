@@ -5,6 +5,7 @@ from pygame.locals import *
 from Player import Player
 from Wall import Wall
 from Road import Road
+from EndPoint import EndPoint
 
 sys.path.insert(0, '../Maze-Runner-Server')
 from BacteriaSpread import BacteriaSpread
@@ -50,6 +51,7 @@ class Game:
         x, y = 0, 0
         spriteWall = pygame.image.load("img/wall.png")
         spriteRoad = pygame.image.load("img/ground.png")
+        self.endpoint = EndPoint(0, 0)
         for row in mazeArray:
             for cell in row:
                 if cell:
@@ -121,6 +123,8 @@ class Game:
         # walls
         for wall in self.walls:
             self.screen.blit(wall.sprite, self.remap(wall.rect))
+
+        self.screen.blit(self.endpoint.sprite, self.remap(self.endpoint.rect))
 
         # other players
         for player in self.players:
