@@ -1,6 +1,7 @@
 import sys
 import pygame
 from pygame.locals import *
+import math
 
 from Player import Player
 from Client import Client
@@ -21,7 +22,6 @@ class Game:
     framerate = 60
 
     def __init__(self):
-        self.mainPlayer = Player(1, 160, 160)
         pygame.init()
         pygame.key.set_repeat(20)
         self.clock = pygame.time.Clock()
@@ -41,16 +41,36 @@ class Game:
 
     def loadInitDataFromServer(self):  # test
         self.client = Client()
-        #self.client.send()
 
-        # load init data from server
-        # player id
-        # other player data
-        # map
-        mazeArray = BacteriaSpread.generateBooleanMaze(25, 25)
-        position = BacteriaSpread.generateEndPoint(mazeArray, 25)
-        self.endpoint = EndPoint(position.y * 128, position.x * 128)
-        self.prepareMap(mazeArray)
+        # hello
+        self.client.send(b'00', b'')
+
+        while True:
+            msg = self.client.receive()
+            if msg[0] == 0x01:  # whoami
+                nr = int(msg[1].decode(), 16)
+                self.mainPlayer = Player(nr, 160, 160)
+            elif msg[0] == 0x02:  # map
+                mazeSize = int(math.sqrt(len(msg[1])))
+                booleanArray = [[True for x in range(mazeSize)] for y in range(mazeSize)]
+                for i in range(mazeSize):
+                    for j in range(mazeSize):
+                        if msg[1][i * mazeSize + j] == b'0':
+                            booleanArray[i][j] = False
+                self.prepareMap(booleanArray)
+            elif msg[0] == 0x03:  # endpoint
+                posX = int(msg[1][:2].decode(), 16)
+                posY = int(msg[1][2:].decode(), 16)
+                self.endpoint = EndPoint(posY * 128, posX * 128)
+            elif msg[0] == 0x04:  # players
+                number = int(msg[1].decode(), 16)
+                for i in range(number):
+                    if not self.mainPlayer.id == i:
+                        self.players.append(Player(id, 160, 160))
+            elif msg[0] == 0x05:  # start
+                break
+            else:
+                raise Exception()
 
     def prepareMap(self, mazeArray):
         x, y = 0, 0
