@@ -1,15 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="a0fcc406-ec0e-4a47-905c-4a417fdc3cfc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Maze-Runner-Client/Client.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Maze-Runner-Server/Server.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Maze-Runner-Client/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/Maze-Runner-Client/Game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maze-Runner-Server/BacteriaSpread.py" beforeDir="false" afterPath="$PROJECT_DIR$/Maze-Runner-Server/BacteriaSpread.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -32,14 +58,14 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="Docker" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Tomputer\PycharmProjects\Maze-runner" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Game">
+  <component name="RunManager" selected="Python.Client">
     <configuration name="BacteriaSpread" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Maze-runner" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -54,6 +80,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Maze-Runner-Server/BacteriaSpread.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Client" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Maze-runner" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Maze-Runner-Client" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Maze-Runner-Client/Client.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -84,9 +132,33 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Server" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Maze-runner" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Maze-Runner-Server" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Maze-Runner-Server/Server.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Client" />
         <item itemvalue="Python.Game" />
+        <item itemvalue="Python.Server" />
         <item itemvalue="Python.BacteriaSpread" />
       </list>
     </recent_temporary>
@@ -105,57 +177,74 @@
       <workItem from="1587843233728" duration="6967000" />
       <workItem from="1587990275812" duration="25000" />
       <workItem from="1588006757702" duration="3323000" />
-      <workItem from="1588091702440" duration="1817000" />
+      <workItem from="1588091702440" duration="11425000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
     <state x="460" y="119" key="FileChooserDialogImpl" timestamp="1587843038184">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
     <state x="460" y="119" key="FileChooserDialogImpl/0.0.1360.728@0.0.1360.728" timestamp="1587843038184" />
-    <state width="1317" height="179" key="GridCell.Tab.0.bottom" timestamp="1588093519614">
+    <state width="1317" height="172" key="GridCell.Tab.0.bottom" timestamp="1588103352771">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="179" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1588093519614" />
-    <state width="1317" height="179" key="GridCell.Tab.0.center" timestamp="1588093519614">
+    <state width="1317" height="172" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1588103352771" />
+    <state width="1317" height="172" key="GridCell.Tab.0.center" timestamp="1588103352771">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="179" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1588093519614" />
-    <state width="1317" height="179" key="GridCell.Tab.0.left" timestamp="1588093519614">
+    <state width="1317" height="172" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1588103352771" />
+    <state width="1317" height="172" key="GridCell.Tab.0.left" timestamp="1588103352771">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="179" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1588093519614" />
-    <state width="1317" height="179" key="GridCell.Tab.0.right" timestamp="1588093519614">
+    <state width="1317" height="172" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1588103352771" />
+    <state width="1317" height="172" key="GridCell.Tab.0.right" timestamp="1588103352771">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="179" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1588093519614" />
-    <state width="1317" height="424" key="GridCell.Tab.1.bottom" timestamp="1588092491615">
+    <state width="1317" height="172" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1588103352771" />
+    <state width="1317" height="424" key="GridCell.Tab.1.bottom" timestamp="1588099803797">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="424" key="GridCell.Tab.1.bottom/0.0.1360.728@0.0.1360.728" timestamp="1588092491615" />
-    <state width="1317" height="424" key="GridCell.Tab.1.center" timestamp="1588092491614">
+    <state width="1317" height="424" key="GridCell.Tab.1.bottom/0.0.1360.728@0.0.1360.728" timestamp="1588099803797" />
+    <state width="1317" height="424" key="GridCell.Tab.1.center" timestamp="1588099803797">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="424" key="GridCell.Tab.1.center/0.0.1360.728@0.0.1360.728" timestamp="1588092491614" />
-    <state width="1317" height="424" key="GridCell.Tab.1.left" timestamp="1588092491614">
+    <state width="1317" height="424" key="GridCell.Tab.1.center/0.0.1360.728@0.0.1360.728" timestamp="1588099803797" />
+    <state width="1317" height="424" key="GridCell.Tab.1.left" timestamp="1588099803797">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="424" key="GridCell.Tab.1.left/0.0.1360.728@0.0.1360.728" timestamp="1588092491614" />
-    <state width="1317" height="424" key="GridCell.Tab.1.right" timestamp="1588092491615">
+    <state width="1317" height="424" key="GridCell.Tab.1.left/0.0.1360.728@0.0.1360.728" timestamp="1588099803797" />
+    <state width="1317" height="424" key="GridCell.Tab.1.right" timestamp="1588099803797">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="424" key="GridCell.Tab.1.right/0.0.1360.728@0.0.1360.728" timestamp="1588092491615" />
-    <state x="181" y="9" key="SettingsEditor" timestamp="1587843015201">
+    <state width="1317" height="424" key="GridCell.Tab.1.right/0.0.1360.728@0.0.1360.728" timestamp="1588099803797" />
+    <state x="181" y="9" key="SettingsEditor" timestamp="1588094477909">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="181" y="9" key="SettingsEditor/0.0.1360.728@0.0.1360.728" timestamp="1587843015201" />
+    <state x="181" y="9" key="SettingsEditor/0.0.1360.728@0.0.1360.728" timestamp="1588094477909" />
+    <state x="527" y="278" key="VCS.ChangelistChooser" timestamp="1588103400502">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state x="527" y="278" key="VCS.ChangelistChooser/0.0.1360.728@0.0.1360.728" timestamp="1588103400502" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Maze_runner$Game.coverage" NAME="Game Coverage Results" MODIFIED="1588093620166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Maze-Runner-Client" />
+    <SUITE FILE_PATH="coverage/Maze_runner$Game.coverage" NAME="Game Coverage Results" MODIFIED="1588101495000" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Maze-Runner-Client" />
+    <SUITE FILE_PATH="coverage/Maze_runner$Server.coverage" NAME="Server Coverage Results" MODIFIED="1588101493349" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Maze-Runner-Server" />
     <SUITE FILE_PATH="coverage/Maze_runner$BacteriaSpread.coverage" NAME="BacteriaSpread Coverage Results" MODIFIED="1588093134150" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Maze-Runner-Server" />
+    <SUITE FILE_PATH="coverage/Maze_runner$Client.coverage" NAME="Client Coverage Results" MODIFIED="1588103333640" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Maze-Runner-Client" />
   </component>
 </project>

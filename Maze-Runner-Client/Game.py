@@ -1,9 +1,9 @@
 import sys
 import pygame
 from pygame.locals import *
-import socket
 
 from Player import Player
+from Client import Client
 from Wall import Wall
 from Road import Road
 from EndPoint import EndPoint
@@ -33,8 +33,6 @@ class Game:
         self.walls = []
         self.roads = []
 
-        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
     def run(self):
         self.loadInitDataFromServer()
 
@@ -42,22 +40,16 @@ class Game:
             self.executeGameLogic()
 
     def loadInitDataFromServer(self):  # test
-
-        self.socket.connect('localhost', 6666)
-        self.socket.send(b'0000000000')
-        while True:
-            data = self.socket.recv(1)
-            if not data:
-                break
-            
+        self.client = Client()
+        #self.client.send()
 
         # load init data from server
         # player id
         # other player data
         # map
-        mazeArray = BacteriaSpread.generateBooleanMaze(20, 20)
+        mazeArray = BacteriaSpread.generateBooleanMaze(25, 25)
         position = BacteriaSpread.generateEndPoint(mazeArray, 25)
-        self.endpoint = EndPoint((position.y) * 128, (position.x) * 128)
+        self.endpoint = EndPoint(position.y * 128, position.x * 128)
         self.prepareMap(mazeArray)
 
     def prepareMap(self, mazeArray):
@@ -77,7 +69,7 @@ class Game:
     def executeGameLogic(self):
         # load data from server
 
-        dt = self.clock.tick(self.framerate)
+        dt = self.clock.tick(self.framerate) // 1.75
 
         self.handleKeyboard(dt)
 
@@ -150,7 +142,6 @@ class Game:
 
     def remap(self, rect):
         return rect.x - self.cameraX, rect.y - self.cameraY
-
 
 
 game = Game()
