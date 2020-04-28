@@ -1,7 +1,10 @@
 import sys
+import time
+
 import pygame
 from pygame.locals import *
 import math
+import threading
 
 from Player import Player
 from Client import Client
@@ -17,6 +20,7 @@ class Game:
     playerSpeed = 1
     sizeOfWall = 128
     framerate = 60
+    end = False
 
     def __init__(self):
         pygame.init()
@@ -33,7 +37,10 @@ class Game:
     def run(self):
         self.loadInitDataFromServer()
 
-        while 1:
+        threading.Thread(target=self.receiveMesseges, args=()).start()
+        threading.Thread(target=self.sendPosition, args=()).start()
+
+        while not self.end:
             self.executeGameLogic()
 
     def loadInitDataFromServer(self):  # test
@@ -84,15 +91,12 @@ class Game:
             y = 0
 
     def executeGameLogic(self):
-        # load data from server
 
         dt = self.clock.tick(self.framerate) // 1.75
 
         self.handleKeyboard(dt)
 
         self.handleCollision(dt)
-
-        # send data to server
 
         self.draw()
 
@@ -160,6 +164,33 @@ class Game:
     def remap(self, rect):
         return rect.x - self.cameraX, rect.y - self.cameraY
 
+    def sendPosition(self):
+        while True:
+            position = hex(self.mainPlayer.id)[2:].encode().rjust(2, b'0') +\
+                       hex(self.mainPlayer.rect.x)[2:].encode().rjust(4, b'0') +\
+                       hex(self.mainPlayer.rect.y)[2:].encode().rjust(4, b'0')
+            time.sleep(0.05)
+            self.client.send(b'06', position)
+
+    def receiveMesseges(self):
+        while True:
+            msg = self.client.receive()
+
+            if msg[0] == 0x07:
+                playerId = int(msg[1][:2].decode(), 16)
+                posX = int(msg[1][2:6].decode(), 16)
+                posY = int(msg[1][6:].decode(), 16)
+                for p in self.players:
+                    if p.id == playerId:
+                        p.setPosition(posX, posY)
+            elif msg[0] == 0x09:
+                winPlayerId = int(msg[1].decode(), 16)
+                if self.mainPlayer.id == winPlayerId:
+                    print("Yup")
+                else:
+                    print("nup")
+                self.end = True
+                # todo end game screen
 
 game = Game()
 game.run()
