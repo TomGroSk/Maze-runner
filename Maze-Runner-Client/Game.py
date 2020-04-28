@@ -1,6 +1,7 @@
 import sys
 import pygame
 from pygame.locals import *
+import socket
 
 from Player import Player
 from Wall import Wall
@@ -32,6 +33,8 @@ class Game:
         self.walls = []
         self.roads = []
 
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
     def run(self):
         self.loadInitDataFromServer()
 
@@ -39,6 +42,15 @@ class Game:
             self.executeGameLogic()
 
     def loadInitDataFromServer(self):  # test
+
+        self.socket.connect('localhost', 6666)
+        self.socket.send(b'0000000000')
+        while True:
+            data = self.socket.recv(1)
+            if not data:
+                break
+            
+
         # load init data from server
         # player id
         # other player data
@@ -138,6 +150,7 @@ class Game:
 
     def remap(self, rect):
         return rect.x - self.cameraX, rect.y - self.cameraY
+
 
 
 game = Game()
