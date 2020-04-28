@@ -43,15 +43,16 @@ class Game:
         # player id
         # other player data
         # map
-
-        mazeArray = BacteriaSpread.generateBooleanMaze(25, 25)
+        mazeArray = BacteriaSpread.generateBooleanMaze(20, 20)
+        position = BacteriaSpread.generateEndPoint(mazeArray, 25)
+        self.endpoint = EndPoint((position.y) * 128, (position.x) * 128)
         self.prepareMap(mazeArray)
 
     def prepareMap(self, mazeArray):
         x, y = 0, 0
         spriteWall = pygame.image.load("img/wall.png")
         spriteRoad = pygame.image.load("img/ground.png")
-        self.endpoint = EndPoint(0, 0)
+
         for row in mazeArray:
             for cell in row:
                 if cell:

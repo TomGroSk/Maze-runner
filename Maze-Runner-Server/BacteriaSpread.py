@@ -7,7 +7,7 @@ from random import shuffle
 
 class BacteriaSpread:
     @staticmethod
-    def generate(x, y):
+    def generateBacteriaLayout(x, y):
         mazeLayout = Maze(x, y)
         currentLayer = []
         nextLayer = []
@@ -34,7 +34,7 @@ class BacteriaSpread:
 
     @staticmethod
     def generateBooleanMaze(x, y):
-        rawMaze = BacteriaSpread.generate(x, y)
+        rawMaze = BacteriaSpread.generateBacteriaLayout(x, y)
         return Converter.toBoolArray(rawMaze)
 
     @staticmethod
@@ -52,10 +52,3 @@ class BacteriaSpread:
             end_y = randint(y_buffer, y)
 
         return Position(end_x, end_y)
-
-
-
-
-
-
-# BacteriaSpread.generateBooleanMaze(10, 10)
