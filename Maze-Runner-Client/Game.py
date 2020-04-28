@@ -37,8 +37,8 @@ class Game:
     def run(self):
         self.loadInitDataFromServer()
 
-        threading.Thread(target=self.receiveMesseges, args=()).start()
         threading.Thread(target=self.sendPosition, args=()).start()
+        threading.Thread(target=self.receiveMesseges, args=()).start()
 
         while not self.end:
             self.executeGameLogic()
