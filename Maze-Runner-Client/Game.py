@@ -15,7 +15,7 @@ class Game:
     windowSize = width, height = 800, 600
     cameraX, cameraY = -240, -140
     lastPlayerMove = '.'
-    playerSpeed = 10
+    playerSpeed = 1
     sizeOfWall = 128
     framerate = 60
 
@@ -64,54 +64,54 @@ class Game:
     def executeGameLogic(self):
         # load data from server
 
-        self.handleKeyboard()
+        dt = self.clock.tick(self.framerate)
 
-        self.handleCollision()
+        self.handleKeyboard(dt)
+
+        self.handleCollision(dt)
 
         # send data to server
 
-        self.clock.tick(self.framerate)
-
         self.draw()
 
-    def handleKeyboard(self):
+    def handleKeyboard(self, dt):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == K_w:
                     self.lastPlayerMove = 'w'
-                    self.mainPlayer.move(0, -self.playerSpeed)
-                    self.cameraY -= self.playerSpeed
+                    self.mainPlayer.move(0, -self.playerSpeed * dt)
+                    self.cameraY -= self.playerSpeed * dt
                 if event.key == K_s:
                     self.lastPlayerMove = 's'
-                    self.mainPlayer.move(0, self.playerSpeed)
-                    self.cameraY += self.playerSpeed
+                    self.mainPlayer.move(0, self.playerSpeed * dt)
+                    self.cameraY += self.playerSpeed * dt
                 if event.key == K_a:
                     self.lastPlayerMove = 'a'
-                    self.mainPlayer.move(-self.playerSpeed, 0)
-                    self.cameraX -= self.playerSpeed
+                    self.mainPlayer.move(-self.playerSpeed * dt, 0)
+                    self.cameraX -= self.playerSpeed * dt
                 if event.key == K_d:
                     self.lastPlayerMove = 'd'
-                    self.mainPlayer.move(self.playerSpeed, 0)
-                    self.cameraX += self.playerSpeed
+                    self.mainPlayer.move(self.playerSpeed * dt, 0)
+                    self.cameraX += self.playerSpeed * dt
 
-    def handleCollision(self):
+    def handleCollision(self, dt):
 
         for wall in self.walls:
             if wall.collidedWith(self.mainPlayer.rect):
                 if self.lastPlayerMove == 'w':
-                    self.mainPlayer.move(0, self.playerSpeed)
-                    self.cameraY += self.playerSpeed
+                    self.mainPlayer.move(0, self.playerSpeed * dt)
+                    self.cameraY += self.playerSpeed * dt
                 elif self.lastPlayerMove == 's':
-                    self.mainPlayer.move(0, -self.playerSpeed)
-                    self.cameraY -= self.playerSpeed
+                    self.mainPlayer.move(0, -self.playerSpeed * dt)
+                    self.cameraY -= self.playerSpeed * dt
                 elif self.lastPlayerMove == 'a':
-                    self.mainPlayer.move(self.playerSpeed, 0)
-                    self.cameraX += self.playerSpeed
+                    self.mainPlayer.move(self.playerSpeed * dt, 0)
+                    self.cameraX += self.playerSpeed * dt
                 elif self.lastPlayerMove == 'd':
-                    self.mainPlayer.move(-self.playerSpeed, 0)
-                    self.cameraX -= self.playerSpeed
+                    self.mainPlayer.move(-self.playerSpeed * dt, 0)
+                    self.cameraX -= self.playerSpeed * dt
 
     def draw(self):
         self.screen.fill((0, 0, 0))  # clean screen
