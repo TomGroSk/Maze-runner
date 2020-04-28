@@ -9,9 +9,6 @@ from Wall import Wall
 from Road import Road
 from EndPoint import EndPoint
 
-sys.path.insert(0, '../Maze-Runner-Server')
-from BacteriaSpread import BacteriaSpread
-
 
 class Game:
     windowSize = width, height = 800, 600
@@ -55,7 +52,7 @@ class Game:
                 booleanArray = [[True for x in range(mazeSize)] for y in range(mazeSize)]
                 for i in range(mazeSize):
                     for j in range(mazeSize):
-                        if msg[1][i * mazeSize + j] == b'0':
+                        if msg[1][i * mazeSize + j] == ord('0'):
                             booleanArray[i][j] = False
                 self.prepareMap(booleanArray)
             elif msg[0] == 0x03:  # endpoint
@@ -64,9 +61,9 @@ class Game:
                 self.endpoint = EndPoint(posY * 128, posX * 128)
             elif msg[0] == 0x04:  # players
                 number = int(msg[1].decode(), 16)
-                for i in range(number):
+                for i in range(1, number+1):
                     if not self.mainPlayer.id == i:
-                        self.players.append(Player(id, 160, 160))
+                        self.players.append(Player(i, 160, 160))
             elif msg[0] == 0x05:  # start
                 break
             else:
