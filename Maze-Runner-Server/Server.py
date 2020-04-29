@@ -6,7 +6,7 @@ import time
 
 import config
 from BacteriaSpread import BacteriaSpread
-
+from sekurak import SecurityDispatcher
 
 class Server:
     socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -15,6 +15,7 @@ class Server:
     clientSockets = []
     positionQueue = queue.Queue()
     resetGame = False
+    securityDispatcher = SecurityDispatcher()
 
     def __init__(self):
         self.map_Layout = BacteriaSpread.generateBooleanMaze(config.MAP_SIZE[0], config.MAP_SIZE[1])
@@ -70,8 +71,7 @@ class Server:
         self.send(b'04', hex(self.numberOfPlayers)[2:].encode(), client)
         self.send(b'05', b'', client)
 
-    @staticmethod
-    def receive(client):
+    def receive(self, client):
         dataCollection = []
         content_Length = 10
         while True:
@@ -83,11 +83,12 @@ class Server:
             if len(dataCollection) == content_Length:
                 break
         header = (b"".join(i for i in dataCollection))
-        return int(header[:2], 16), header[10:]
+        decryptedHeader = self.securityDispatcher.decrypt(header[10:])
+        return int(header[:2], 16), decryptedHeader
 
-    @staticmethod
-    def send(msgType, data, client):
-        msg = msgType + hex(len(data))[2:].encode().rjust(8, b'0') + data
+    def send(self, msgType, data, client):
+        encryptedData = self.securityDispatcher.encrypt(data)
+        msg = msgType + hex(len(encryptedData))[2:].encode().rjust(8, b'0') + encryptedData
         client.send(msg)
 
     def sendToAll(self):

@@ -1,8 +1,11 @@
 import socket
 
+from sekurak import SecurityDispatcher
+
 
 class Client:
     socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    securityDispatcher = SecurityDispatcher()
 
     def __init__(self):
         self.socket.connect(('localhost', 6666))
@@ -19,8 +22,10 @@ class Client:
             if len(dataCollection) == content_Length:
                 break
         header = (b"".join(i for i in dataCollection))
-        return int(header[:2], 16), header[10:]
+        decryptedHeader = self.securityDispatcher.decrypt(header[10:])
+        return int(header[:2], 16), decryptedHeader
 
-    def send(self, type, data):
-        msg = type + hex(len(data))[2:].encode().rjust(8, b'0') + data
+    def send(self, msgType, data):
+        encryptedData = self.securityDispatcher.encrypt(data)
+        msg = msgType + hex(len(encryptedData))[2:].encode().rjust(8, b'0') + encryptedData
         self.socket.send(msg)
