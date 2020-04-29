@@ -130,7 +130,7 @@ class Game:
     def handleKeyboard(self, dt):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                sys.exit()
+                os._exit(0xDEAD)
             if event.type == pygame.KEYDOWN:
                 if event.key == K_w:
                     self.lastPlayerMove = 'w'

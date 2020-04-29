@@ -12,6 +12,7 @@ class Server:
     clientHandlerArr = []
     clientSockets = []
     positionQueue = queue.Queue()
+    resetGame = False
 
     def __init__(self):
         self.map_Layout = BacteriaSpread.generateBooleanMaze(config.MAP_SIZE[0], config.MAP_SIZE[1])
@@ -22,7 +23,11 @@ class Server:
         self.socket.listen()
 
         while True:
-            client, addr = self.socket.accept()
+            try:
+                client, addr = self.socket.accept()
+            except:
+                print("Failed to accept client")
+                continue
             print("Polaczono z: " + addr[0])
             self.numberOfPlayers += 1
             self.clientSockets.append(client)
@@ -34,19 +39,24 @@ class Server:
             c.start()
         threading.Thread(target=self.sendToAll, args=()).start()
 
-    def clientHandler(self, client, numberOfPlayers):
-        while True:
-            response = self.receive(client)
-            if response[0] == 0x00:
-                self.playerInitProtocol(client, numberOfPlayers)
-            elif response[0] == 0x06:
-                self.positionQueue.put(response[1])
-            elif response[0] == 0x08:
-                data = hex(numberOfPlayers)[2:].encode().rjust(2, b'0')
-                self.sendEndGameToAll(data)
+    def clientHandler(self, client, playerID):
+        try:
+            while True:
+                response = self.receive(client)
+                if response[0] == 0x00:
+                    self.playerInitProtocol(client, playerID)
+                elif response[0] == 0x06:
+                    self.positionQueue.put(response[1])
+                elif response[0] == 0x08:
+                    data = hex(playerID)[2:].encode().rjust(2, b'0')
+                    self.sendEndGameToAll(data)
+        except:
+            print("Lost connection with client: " + str(playerID))
+            self.numberOfPlayers -= 1
+            client.close()
 
-    def playerInitProtocol(self, client, numberOfPlayers):
-        data = hex(numberOfPlayers)[2:].encode()
+    def playerInitProtocol(self, client, playerID):
+        data = hex(playerID)[2:].encode()
         position = hex(self.endPoint.x)[2:].encode().rjust(2, b'0') + \
                    hex(self.endPoint.y)[2:].encode().rjust(2, b'0')
         binaryMap = self.parseMap(self.map_Layout)
@@ -81,7 +91,11 @@ class Server:
             item = self.positionQueue.get()
             self.positionQueue.task_done()
             for i in self.clientSockets:
-                self.send(b'07', item, i)
+                try:
+                    self.send(b'07', item, i)
+                except:
+                    print("Failed to send data to client.")
+                    self.clientSockets.remove(i)
 
     def sendEndGameToAll(self, num_id):
         for i in self.clientSockets:
