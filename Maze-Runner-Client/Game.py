@@ -19,6 +19,7 @@ from Screen import Screen
 class Game:
     cameraX, cameraY = -240, -140
     lastPlayerMove = '.'
+    running = False
     end = False
     iWin = False
 
@@ -34,6 +35,10 @@ class Game:
         self.walls = []
         self.roads = []
 
+        self.startScreen = Screen("wait.jpg")
+        self.loseScreen = Screen("lose.png")
+        self.winScreen = Screen("win.png")
+
     def run(self):
         self.loadInitDataFromServer()
 
@@ -47,6 +52,7 @@ class Game:
         self.client = Client()
 
         # hello
+        self.draw()
         self.client.send(b'00', b'')
         while True:
             msg = self.client.receive()
@@ -59,6 +65,7 @@ class Game:
             elif msg[0] == 0x04:  # players
                 self.setOtherPlayers(msg)
             elif msg[0] == 0x05:  # start
+                self.running = True
                 break
             else:
                 raise Exception()
@@ -156,7 +163,9 @@ class Game:
     def draw(self):
         self.screen.fill((0, 0, 0))  # clean screen
 
-        if not self.end:
+        if not self.running:
+            self.screen.blit(self.startScreen.sprite, self.center(self.startScreen.rect))
+        elif not self.end:
             # roads
             for road in self.roads:
                 self.screen.blit(road.sprite, self.remap(road.rect))
@@ -174,13 +183,18 @@ class Game:
             # main player
             self.screen.blit(self.mainPlayer.sprite, self.remap(self.mainPlayer.rect))
         else:
-            print(self.iWin)
-            # todo print img
+            if self.iWin:
+                self.screen.blit(self.winScreen.sprite, self.center(self.winScreen.rect))
+            else:
+                self.screen.blit(self.loseScreen.sprite, self.center(self.loseScreen.rect))
 
         pygame.display.flip()  # display on screen
 
     def remap(self, rect):
         return rect.x - self.cameraX, rect.y - self.cameraY
+
+    def center(self, rect):
+        return (config.WINDOW_SIZE[0] // 2 - rect.width // 2), (config.WINDOW_SIZE[1] // 2 - rect.height // 2)
 
     def sendPosition(self):
         while True:
