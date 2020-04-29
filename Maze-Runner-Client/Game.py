@@ -49,26 +49,35 @@ class Game:
             self.executeGameLogic()
 
     def loadInitDataFromServer(self):  # test
-        self.client = Client()
+        try:
+            self.client = Client()
+        except:
+            print("Cannot connect to server :<")
+            os._exit(0x01)
 
         # hello
         self.draw()
-        self.client.send(b'00', b'')
-        while True:
-            msg = self.client.receive()
-            if msg[0] == 0x01:  # whoami
-                self.setPlayer(msg)
-            elif msg[0] == 0x02:  # map
-                self.setMap(msg)
-            elif msg[0] == 0x03:  # endpoint
-                self.setEndPoint(msg)
-            elif msg[0] == 0x04:  # players
-                self.setOtherPlayers(msg)
-            elif msg[0] == 0x05:  # start
-                self.running = True
-                break
-            else:
-                raise Exception()
+
+        try:
+            self.client.send(b'00', b'')
+            while True:
+                msg = self.client.receive()
+                if msg[0] == 0x01:  # whoami
+                    self.setPlayer(msg)
+                elif msg[0] == 0x02:  # map
+                    self.setMap(msg)
+                elif msg[0] == 0x03:  # endpoint
+                    self.setEndPoint(msg)
+                elif msg[0] == 0x04:  # players
+                    self.setOtherPlayers(msg)
+                elif msg[0] == 0x05:  # start
+                    self.running = True
+                    break
+                else:
+                    raise Exception()
+        except:
+            print("Fail to load initial data from server")
+            os._exit(0x02)
 
     def setPlayer(self, msg):
         nr = int(msg[1].decode(), 16)
@@ -194,33 +203,41 @@ class Game:
         return (config.WINDOW_SIZE[0] // 2 - rect.width // 2), (config.WINDOW_SIZE[1] // 2 - rect.height // 2)
 
     def sendPosition(self):
-        while True:
-            position = hex(self.mainPlayer.id)[2:].encode().rjust(2, b'0') + \
-                       hex(self.mainPlayer.rect.x)[2:].encode().rjust(4, b'0') + \
-                       hex(self.mainPlayer.rect.y)[2:].encode().rjust(4, b'0')
-            time.sleep(0.05)
-            self.client.send(b'06', position)
+        try:
+            while True:
+                position = hex(self.mainPlayer.id)[2:].encode().rjust(2, b'0') + \
+                           hex(self.mainPlayer.rect.x)[2:].encode().rjust(4, b'0') + \
+                           hex(self.mainPlayer.rect.y)[2:].encode().rjust(4, b'0')
+                time.sleep(0.05)
+                self.client.send(b'06', position)
+        except:
+            print("Cannot send position to server")
+            os._exit(0x03)
 
     def receiveMesseges(self):
-        while True:
-            msg = self.client.receive()
+        try:
+            while True:
+                msg = self.client.receive()
 
-            if msg[0] == 0x07:
-                playerId = int(msg[1][:2].decode(), 16)
-                posX = int(msg[1][2:6].decode(), 16)
-                posY = int(msg[1][6:].decode(), 16)
-                for p in self.players:
-                    if p.id == playerId:
-                        p.setPosition(posX, posY)
-            elif msg[0] == 0x09:
-                winPlayerId = int(msg[1].decode(), 16)
-                if self.mainPlayer.id == winPlayerId:
-                    self.iWin = True
-                else:
-                    self.iWin = False
-                self.end = True
-                time.sleep(5)
-                os._exit(0xdead)
+                if msg[0] == 0x07:
+                    playerId = int(msg[1][:2].decode(), 16)
+                    posX = int(msg[1][2:6].decode(), 16)
+                    posY = int(msg[1][6:].decode(), 16)
+                    for p in self.players:
+                        if p.id == playerId:
+                            p.setPosition(posX, posY)
+                elif msg[0] == 0x09:
+                    winPlayerId = int(msg[1].decode(), 16)
+                    if self.mainPlayer.id == winPlayerId:
+                        self.iWin = True
+                    else:
+                        self.iWin = False
+                    self.end = True
+                    time.sleep(5)
+                    os._exit(0xdead)
+        except:
+            print("Cannot receive message from server")
+            os._exit(0x04)
 
 
 game = Game()
