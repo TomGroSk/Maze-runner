@@ -1,6 +1,8 @@
+import os
 import socket
 import threading
 import queue
+import time
 
 import config
 from BacteriaSpread import BacteriaSpread
@@ -50,6 +52,8 @@ class Server:
                 elif response[0] == 0x08:
                     data = hex(playerID)[2:].encode().rjust(2, b'0')
                     self.sendEndGameToAll(data)
+                    time.sleep(7)
+                    os._exit(0xDEAD)
         except:
             print("Lost connection with client: " + str(playerID))
             self.numberOfPlayers -= 1
