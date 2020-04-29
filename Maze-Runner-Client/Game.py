@@ -12,6 +12,7 @@ from Client import Client
 from Wall import Wall
 from Road import Road
 from EndPoint import EndPoint
+from Screen import Screen
 
 
 class Game:
@@ -201,6 +202,7 @@ class Game:
                 self.end = True
                 time.sleep(5)
                 os._exit(0xdead)
+
 
 game = Game()
 game.run()
