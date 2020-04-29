@@ -14,3 +14,11 @@
 | 0x07 | other player pos | other players position - send by server |
 | 0x08 | player end | from player - reached endpoint |
 | 0x09 | server end | from server to all players about winner |
+
+### Protocol Frame diagram
+
+![frame](docs/frame.png)
+
+### Communication diagram
+
+![diagram](docs/diagram.png)
