@@ -50,33 +50,44 @@ class Game:
 
         # hello
         self.client.send(b'00', b'')
-
         while True:
             msg = self.client.receive()
             if msg[0] == 0x01:  # whoami
-                nr = int(msg[1].decode(), 16)
-                self.mainPlayer = Player(nr, 160, 160)
+                self.setPlayer(msg)
             elif msg[0] == 0x02:  # map
-                mazeSize = int(math.sqrt(len(msg[1])))
-                booleanArray = [[True for x in range(mazeSize)] for y in range(mazeSize)]
-                for i in range(mazeSize):
-                    for j in range(mazeSize):
-                        if msg[1][i * mazeSize + j] == ord('0'):
-                            booleanArray[i][j] = False
-                self.prepareMap(booleanArray)
+                self.setMap(msg)
             elif msg[0] == 0x03:  # endpoint
-                posX = int(msg[1][:2].decode(), 16)
-                posY = int(msg[1][2:].decode(), 16)
-                self.endpoint = EndPoint(posY * 128, posX * 128)
+                self.setEndPoint(msg)
             elif msg[0] == 0x04:  # players
-                number = int(msg[1].decode(), 16)
-                for i in range(1, number+1):
-                    if not self.mainPlayer.id == i:
-                        self.players.append(Player(i, 160, 160))
+                self.setOtherPlayers(msg)
             elif msg[0] == 0x05:  # start
                 break
             else:
                 raise Exception()
+
+    def setPlayer(self, msg):
+        nr = int(msg[1].decode(), 16)
+        self.mainPlayer = Player(nr, 160, 160)
+
+    def setOtherPlayers(self, msg):
+        number = int(msg[1].decode(), 16)
+        for i in range(1, number + 1):
+            if not self.mainPlayer.id == i:
+                self.players.append(Player(i, 160, 160))
+
+    def setEndPoint(self, msg):
+        posX = int(msg[1][:2].decode(), 16)
+        posY = int(msg[1][2:].decode(), 16)
+        self.endpoint = EndPoint(posY * 128, posX * 128)
+
+    def setMap(self, msg):
+        mazeSize = int(math.sqrt(len(msg[1])))
+        booleanArray = [[True for x in range(mazeSize)] for y in range(mazeSize)]
+        for i in range(mazeSize):
+            for j in range(mazeSize):
+                if msg[1][i * mazeSize + j] == ord('0'):
+                    booleanArray[i][j] = False
+        self.prepareMap(booleanArray)
 
     def prepareMap(self, mazeArray):
         x, y = 0, 0
@@ -175,8 +186,8 @@ class Game:
 
     def sendPosition(self):
         while True:
-            position = hex(self.mainPlayer.id)[2:].encode().rjust(2, b'0') +\
-                       hex(self.mainPlayer.rect.x)[2:].encode().rjust(4, b'0') +\
+            position = hex(self.mainPlayer.id)[2:].encode().rjust(2, b'0') + \
+                       hex(self.mainPlayer.rect.x)[2:].encode().rjust(4, b'0') + \
                        hex(self.mainPlayer.rect.y)[2:].encode().rjust(4, b'0')
             time.sleep(0.05)
             self.client.send(b'06', position)
@@ -201,6 +212,7 @@ class Game:
                 self.end = True
                 time.sleep(5)
                 os._exit(0xdead)
+
 
 game = Game()
 game.run()
