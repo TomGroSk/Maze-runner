@@ -7,6 +7,7 @@ from pygame.locals import *
 import math
 import threading
 
+import config
 from Player import Player
 from Client import Client
 from Wall import Wall
@@ -16,12 +17,8 @@ from Screen import Screen
 
 
 class Game:
-    windowSize = width, height = 800, 600
     cameraX, cameraY = -240, -140
     lastPlayerMove = '.'
-    playerSpeed = 1
-    sizeOfWall = 128
-    framerate = 60
     end = False
     iWin = False
 
@@ -30,7 +27,7 @@ class Game:
         pygame.key.set_repeat(20)
         self.clock = pygame.time.Clock()
 
-        self.screen = pygame.display.set_mode(self.windowSize, DOUBLEBUF)
+        self.screen = pygame.display.set_mode(config.WINDOW_SIZE, DOUBLEBUF)
         self.screen.set_alpha(None)
 
         self.players = []
@@ -100,13 +97,13 @@ class Game:
                 if cell:
                     self.walls.append(Wall(y, x, spriteWall))
                 self.roads.append(Road(y, x, spriteRoad))
-                y += self.sizeOfWall
-            x += self.sizeOfWall
+                y += config.SIZE_OF_WALL
+            x += config.SIZE_OF_WALL
             y = 0
 
     def executeGameLogic(self):
 
-        dt = self.clock.tick(self.framerate) // 1.75
+        dt = self.clock.tick(config.FRAME_RATE) // 1.75
 
         self.handleKeyboard(dt)
 
@@ -121,37 +118,37 @@ class Game:
             if event.type == pygame.KEYDOWN:
                 if event.key == K_w:
                     self.lastPlayerMove = 'w'
-                    self.mainPlayer.move(0, -self.playerSpeed * dt)
-                    self.cameraY -= self.playerSpeed * dt
+                    self.mainPlayer.move(0, -config.PLAYER_SPEED * dt)
+                    self.cameraY -= config.PLAYER_SPEED * dt
                 if event.key == K_s:
                     self.lastPlayerMove = 's'
-                    self.mainPlayer.move(0, self.playerSpeed * dt)
-                    self.cameraY += self.playerSpeed * dt
+                    self.mainPlayer.move(0, config.PLAYER_SPEED * dt)
+                    self.cameraY += config.PLAYER_SPEED * dt
                 if event.key == K_a:
                     self.lastPlayerMove = 'a'
-                    self.mainPlayer.move(-self.playerSpeed * dt, 0)
-                    self.cameraX -= self.playerSpeed * dt
+                    self.mainPlayer.move(-config.PLAYER_SPEED * dt, 0)
+                    self.cameraX -= config.PLAYER_SPEED * dt
                 if event.key == K_d:
                     self.lastPlayerMove = 'd'
-                    self.mainPlayer.move(self.playerSpeed * dt, 0)
-                    self.cameraX += self.playerSpeed * dt
+                    self.mainPlayer.move(config.PLAYER_SPEED * dt, 0)
+                    self.cameraX += config.PLAYER_SPEED * dt
 
     def handleCollision(self, dt):
 
         for wall in self.walls:
             if wall.collidedWith(self.mainPlayer.rect):
                 if self.lastPlayerMove == 'w':
-                    self.mainPlayer.move(0, self.playerSpeed * dt)
-                    self.cameraY += self.playerSpeed * dt
+                    self.mainPlayer.move(0, config.PLAYER_SPEED * dt)
+                    self.cameraY += config.PLAYER_SPEED * dt
                 elif self.lastPlayerMove == 's':
-                    self.mainPlayer.move(0, -self.playerSpeed * dt)
-                    self.cameraY -= self.playerSpeed * dt
+                    self.mainPlayer.move(0, -config.PLAYER_SPEED * dt)
+                    self.cameraY -= config.PLAYER_SPEED * dt
                 elif self.lastPlayerMove == 'a':
-                    self.mainPlayer.move(self.playerSpeed * dt, 0)
-                    self.cameraX += self.playerSpeed * dt
+                    self.mainPlayer.move(config.PLAYER_SPEED * dt, 0)
+                    self.cameraX += config.PLAYER_SPEED * dt
                 elif self.lastPlayerMove == 'd':
-                    self.mainPlayer.move(-self.playerSpeed * dt, 0)
-                    self.cameraX -= self.playerSpeed * dt
+                    self.mainPlayer.move(-config.PLAYER_SPEED * dt, 0)
+                    self.cameraX -= config.PLAYER_SPEED * dt
 
         if self.endpoint.rect.colliderect(self.mainPlayer.rect):
             self.client.send(b'08', hex(self.mainPlayer.id)[2:].encode().rjust(2, b'0'))
