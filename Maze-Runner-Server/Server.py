@@ -14,7 +14,7 @@ class Server:
     positionQueue = queue.Queue()
 
     def __init__(self):
-        self.map_Layout = BacteriaSpread.generateBooleanMaze(25, 25)
+        self.map_Layout = BacteriaSpread.generateBooleanMaze(5, 5)
         self.endPoint = BacteriaSpread.generateEndPoint(self.map_Layout, 25)
 
     def start(self):

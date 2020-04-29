@@ -1,5 +1,6 @@
 import sys
 import time
+import os
 
 import pygame
 from pygame.locals import *
@@ -21,6 +22,7 @@ class Game:
     sizeOfWall = 128
     framerate = 60
     end = False
+    iWin = False
 
     def __init__(self):
         pygame.init()
@@ -40,7 +42,7 @@ class Game:
         threading.Thread(target=self.sendPosition, args=()).start()
         threading.Thread(target=self.receiveMesseges, args=()).start()
 
-        while not self.end:
+        while True:
             self.executeGameLogic()
 
     def loadInitDataFromServer(self):  # test
@@ -139,25 +141,32 @@ class Game:
                     self.mainPlayer.move(-self.playerSpeed * dt, 0)
                     self.cameraX -= self.playerSpeed * dt
 
+        if self.endpoint.rect.colliderect(self.mainPlayer.rect):
+            self.client.send(b'08', hex(self.mainPlayer.id)[2:].encode().rjust(2, b'0'))
+
     def draw(self):
         self.screen.fill((0, 0, 0))  # clean screen
 
-        # roads
-        for road in self.roads:
-            self.screen.blit(road.sprite, self.remap(road.rect))
+        if not self.end:
+            # roads
+            for road in self.roads:
+                self.screen.blit(road.sprite, self.remap(road.rect))
 
-        # walls
-        for wall in self.walls:
-            self.screen.blit(wall.sprite, self.remap(wall.rect))
+            # walls
+            for wall in self.walls:
+                self.screen.blit(wall.sprite, self.remap(wall.rect))
 
-        self.screen.blit(self.endpoint.sprite, self.remap(self.endpoint.rect))
+            self.screen.blit(self.endpoint.sprite, self.remap(self.endpoint.rect))
 
-        # other players
-        for player in self.players:
-            self.screen.blit(player.sprite, self.remap(player.rect))
+            # other players
+            for player in self.players:
+                self.screen.blit(player.sprite, self.remap(player.rect))
 
-        # main player
-        self.screen.blit(self.mainPlayer.sprite, self.remap(self.mainPlayer.rect))
+            # main player
+            self.screen.blit(self.mainPlayer.sprite, self.remap(self.mainPlayer.rect))
+        else:
+            print(self.iWin)
+            # todo print img
 
         pygame.display.flip()  # display on screen
 
@@ -186,11 +195,12 @@ class Game:
             elif msg[0] == 0x09:
                 winPlayerId = int(msg[1].decode(), 16)
                 if self.mainPlayer.id == winPlayerId:
-                    print("Yup")
+                    self.iWin = True
                 else:
-                    print("nup")
+                    self.iWin = False
                 self.end = True
-                # todo end game screen
+                time.sleep(5)
+                os._exit(0xdead)
 
 game = Game()
 game.run()
