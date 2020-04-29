@@ -40,9 +40,9 @@ class BacteriaSpread:
     @staticmethod
     def generateEndPoint(mazeLayout, areaPercent):
         percentage = areaPercent / 100
-        x, y = len(mazeLayout[0])-1, len(mazeLayout)-1         # size of maze - 1; upper range
-        x_buffer = x - int(x * percentage)-1                   # % area where should not be end game point; lower range
-        y_buffer = y - int(y * percentage)-1
+        x, y = len(mazeLayout[0]) - 1, len(mazeLayout) - 1  # size of maze - 1; upper range
+        x_buffer = x - int(x * percentage) - 1  # % area where should not be end game point; lower range
+        y_buffer = y - int(y * percentage) - 1
 
         end_x = randint(x_buffer, x)
         end_y = randint(y_buffer, y)

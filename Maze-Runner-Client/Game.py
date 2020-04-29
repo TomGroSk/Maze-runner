@@ -141,7 +141,6 @@ class Game:
                     self.cameraX += config.PLAYER_SPEED * dt
 
     def handleCollision(self, dt):
-
         for wall in self.walls:
             if wall.collidedWith(self.mainPlayer.rect):
                 if self.lastPlayerMove == 'w':
@@ -156,15 +155,13 @@ class Game:
                 elif self.lastPlayerMove == 'd':
                     self.mainPlayer.move(-config.PLAYER_SPEED * dt, 0)
                     self.cameraX -= config.PLAYER_SPEED * dt
-
         if self.endpoint.rect.colliderect(self.mainPlayer.rect):
             self.client.send(b'08', hex(self.mainPlayer.id)[2:].encode().rjust(2, b'0'))
 
     def draw(self):
         self.screen.fill((0, 0, 0))  # clean screen
-
         if not self.running:
-            self.screen.blit(self.startScreen.sprite, self.center(self.startScreen.rect))
+            self.screen.blit(self.startScreen.sprite, self.calculateCenter(self.startScreen.rect))
         elif not self.end:
             # roads
             for road in self.roads:
@@ -184,16 +181,16 @@ class Game:
             self.screen.blit(self.mainPlayer.sprite, self.remap(self.mainPlayer.rect))
         else:
             if self.iWin:
-                self.screen.blit(self.winScreen.sprite, self.center(self.winScreen.rect))
+                self.screen.blit(self.winScreen.sprite, self.calculateCenter(self.winScreen.rect))
             else:
-                self.screen.blit(self.loseScreen.sprite, self.center(self.loseScreen.rect))
+                self.screen.blit(self.loseScreen.sprite, self.calculateCenter(self.loseScreen.rect))
 
         pygame.display.flip()  # display on screen
 
     def remap(self, rect):
         return rect.x - self.cameraX, rect.y - self.cameraY
 
-    def center(self, rect):
+    def calculateCenter(self, rect):
         return (config.WINDOW_SIZE[0] // 2 - rect.width // 2), (config.WINDOW_SIZE[1] // 2 - rect.height // 2)
 
     def sendPosition(self):

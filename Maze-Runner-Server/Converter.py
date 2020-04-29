@@ -30,4 +30,3 @@ class Converter:
                     booleanArray[i][j] = False
 
         return booleanArray
-
